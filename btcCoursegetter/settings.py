@@ -27,7 +27,7 @@ SECRET_KEY = '^0l2&$70)l1iy_t0e$)#*3!3b(y9qse6hp#u&byb6h%*v@_5h='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','0.0.0.0']
 
 # Application definition
 
@@ -130,8 +130,8 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     "runs-every": {
         "task": "getter.tasks.btc",
-        # "schedule": 10.0,
-        "schedule": crontab(minute='*/' + os.environ.get('STEP')),
+        "schedule": int(os.environ.get('STEP')) * 60.0,
+        # "schedule": crontab(minute='*/' + os.environ.get('STEP')),
     },
 }
 # CELERY_QUEUES = (
